@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Dinto Martin — Azure Cloud &amp; Infrastructure Engineer</title>
+<meta name="description" content="Dinto Martin — Azure-focused cloud & infrastructure engineer. Azure administration & engineering, AWS, Terraform, identity and security. 9 Microsoft Azure certifications." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --paper:#faf9f6;
+    --ink:#16161a;
+    --ink-soft:#5b5b63;
+    --accent:#2b4fff;      /* change this one value to re-theme the whole site */
+    --accent-soft:#eaeefc;
+    --line:#e6e4dd;
+    --radius:14px;
+    --maxw:1040px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;
+    font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  a{color:inherit;}
+
+  .mono{
+    font-family:"JetBrains Mono",monospace;
+    font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft);
+  }
+
+  /* ---------- top bar ---------- */
+  header.topbar{
+    position:sticky; top:0; z-index:10;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex; justify-content:space-between; align-items:center; padding:15px 28px;}
+  .topbar .name{font-family:"Sora",sans-serif; font-weight:700; letter-spacing:-.01em; font-size:1.05rem;}
+  .topbar nav{display:flex; gap:24px;}
+  .topbar nav a{text-decoration:none; font-size:.92rem; color:var(--ink-soft); transition:color .15s;}
+  .topbar nav a:hover{color:var(--accent);}
+  @media (max-width:700px){.topbar nav{display:none;}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:92px 0 60px;}
+  .hero .eyebrow{margin-bottom:24px;}
+  .hero h1{
+    font-family:"Sora",sans-serif; font-weight:800;
+    font-size:clamp(2.5rem,8.5vw,5.4rem); line-height:1.0; letter-spacing:-.035em; margin:0 0 26px;
+  }
+  .hero h1 .accent{color:var(--accent);}
+  .hero p.lede{max-width:600px; font-size:clamp(1.05rem,2.4vw,1.28rem); color:var(--ink-soft); margin:0 0 32px;}
+  .hero .actions{display:flex; gap:13px; flex-wrap:wrap;}
+
+  /* hero facts row */
+  .facts{display:grid; grid-template-columns:repeat(3,1fr); margin-top:50px; border-top:1px solid var(--line);}
+  .facts .f{padding:24px 28px; border-right:1px solid var(--line);}
+  .facts .f:first-child{padding-left:0;}
+  .facts .f:last-child{border-right:none; padding-right:0;}
+  .facts .f .k{font-family:"JetBrains Mono",monospace; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft);}
+  .facts .f .v{font-family:"Sora",sans-serif; font-weight:700; font-size:1.25rem; margin-top:9px; letter-spacing:-.01em;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:12px 21px; border-radius:100px;
+    text-decoration:none; font-size:.95rem; font-weight:500; border:1px solid var(--ink);
+    transition:transform .15s, background .15s, color .15s, border-color .15s;
+  }
+  .btn.primary{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .btn.primary:hover{background:var(--accent); border-color:var(--accent); transform:translateY(-2px);}
+  .btn.ghost:hover{background:var(--ink); color:var(--paper); transform:translateY(-2px);}
+
+  /* ---------- sections ---------- */
+  section{padding:60px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:center; gap:14px; margin-bottom:36px;}
+  .section-head::before{content:""; width:26px; height:3px; background:var(--accent); border-radius:2px; flex:none;}
+  .section-head h2{font-family:"Sora",sans-serif; font-weight:700; font-size:1.55rem; letter-spacing:-.02em; margin:0;}
+
+  /* experience */
+  .xp{padding:26px 0; border-bottom:1px solid var(--line);}
+  .xp:first-child{padding-top:0;}
+  .xp:last-child{border-bottom:none; padding-bottom:0;}
+  .xp .row{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; align-items:baseline;}
+  .xp h3{font-family:"Sora",sans-serif; font-weight:700; font-size:1.35rem; letter-spacing:-.015em; margin:0 0 5px;}
+  .xp .sub{color:var(--accent); font-size:.95rem; font-weight:500;}
+  .xp .when{font-family:"JetBrains Mono",monospace; font-size:.76rem; color:var(--ink-soft); white-space:nowrap;}
+  .xp .co{color:var(--ink-soft); font-size:.92rem; margin-top:3px;}
+  .xp ul{margin:20px 0 0; padding-left:18px; display:grid; gap:10px;}
+  .xp ul li{padding-left:6px;}
+  .xp ul li::marker{color:var(--accent);}
+
+  /* skills */
+  .skills{display:grid; grid-template-columns:repeat(2,1fr); gap:26px 40px;}
+  .skillcard .g{margin-bottom:14px;}
+  .chips{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{font-size:.86rem; padding:7px 14px; border:1px solid var(--line); border-radius:100px; background:#fff; transition:border-color .15s, color .15s;}
+  .chip:hover{border-color:var(--ink);}
+
+  .skillcard.featured{
+    grid-column:1 / -1; border:1.5px solid var(--accent);
+    background:var(--accent-soft); border-radius:var(--radius); padding:24px 26px; margin-bottom:4px;
+  }
+  .skillcard.featured .g{color:var(--accent); font-weight:600;}
+  .skillcard.featured .chip{font-size:.92rem; padding:9px 16px; border-color:#c9d4fb; background:#fff; font-weight:500;}
+  .skillcard.featured .chip:hover{border-color:var(--accent); color:var(--accent);}
+
+  /* certifications — clean, no dividers */
+  .certgroup{margin-bottom:30px;}
+  .certgroup:last-child{margin-bottom:0;}
+  .certgroup .glabel{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .certgroup .glabel .gname{font-family:"Sora",sans-serif; font-weight:700; font-size:1.1rem; letter-spacing:-.01em;}
+  .certgroup .glabel .count{font-family:"JetBrains Mono",monospace; font-size:.7rem; color:var(--accent); border:1px solid var(--accent); border-radius:100px; padding:2px 9px;}
+  .certgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:11px 28px;}
+  .cert{display:flex; gap:11px; align-items:baseline;}
+  .cert .mark{color:var(--accent); font-family:"JetBrains Mono",monospace; font-size:.85rem; flex:none;}
+  .cert span.t{font-size:.95rem; line-height:1.45;}
+
+  /* projects — the indexed hover list */
+  .work{display:grid; gap:0;}
+  .project{
+    display:grid; grid-template-columns:48px 1fr auto; gap:24px; align-items:baseline;
+    padding:26px 8px; border-bottom:1px solid var(--line); text-decoration:none;
+    transition:padding-left .2s, background .2s;
+  }
+  .project:last-child{border-bottom:none;}
+  .project:hover{padding-left:20px; background:color-mix(in srgb, var(--accent) 6%, transparent);}
+  .project .idx{font-family:"JetBrains Mono",monospace; font-size:.8rem; color:var(--ink-soft);}
+  .project h3{font-family:"Sora",sans-serif; font-weight:600; font-size:clamp(1.3rem,3.5vw,1.7rem); letter-spacing:-.01em; margin:0 0 6px;}
+  .project:hover h3{color:var(--accent);}
+  .project .meta{color:var(--ink-soft); font-size:.95rem;}
+  .project .tag{justify-self:end; align-self:center; font-family:"JetBrains Mono",monospace; font-size:.72rem; color:var(--ink-soft); white-space:nowrap;}
+
+  /* education */
+  .edu{padding:22px 0; border-bottom:1px solid var(--line);}
+  .edu:first-child{padding-top:0;}
+  .edu:last-child{border-bottom:none; padding-bottom:0;}
+  .edu h3{font-family:"Sora",sans-serif; font-weight:700; font-size:1.25rem; letter-spacing:-.01em; margin:0 0 5px;}
+  .edu .school{color:var(--ink-soft); font-size:.95rem;}
+  .edu .detail{margin-top:8px; font-family:"JetBrains Mono",monospace; font-size:.74rem; color:var(--accent); letter-spacing:.03em;}
+
+  /* contact */
+  .contact h2{font-family:"Sora",sans-serif; font-weight:800; letter-spacing:-.025em; font-size:clamp(2rem,6vw,3.2rem); margin:0 0 20px; line-height:1.05;}
+  .contact p{max-width:520px; color:var(--ink-soft); margin:0 0 28px;}
+
+  footer{padding:36px 0 56px; color:var(--ink-soft); font-size:.85rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; align-items:center;}
+  footer .flinks{display:flex; gap:20px;}
+  footer .flinks a{text-decoration:none; transition:color .15s;}
+  footer .flinks a:hover{color:var(--accent);}
+
+  a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px;}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ---------- mobile ---------- */
+  @media (max-width:680px){
+    body{font-size:16px;}
+    .wrap{padding:0 20px;}
+    .topbar .wrap{padding:14px 20px;}
+    .hero{padding:60px 0 48px;}
+    section{padding:48px 0;}
+    .skills{grid-template-columns:1fr; gap:24px;}
+    .certgrid{grid-template-columns:1fr; gap:11px;}
+    .facts{grid-template-columns:1fr 1fr; margin-top:40px;}
+    .facts .f{padding:18px 18px; border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
+    .facts .f:nth-child(odd){padding-left:0;}
+    .facts .f:nth-child(2n){border-right:none; padding-right:0;}
+    .facts .f:last-child{border-bottom:none;}
+    .facts .f .v{font-size:1.15rem;}
+    .project{grid-template-columns:30px 1fr; gap:16px; padding:22px 6px;}
+    .project .tag{display:none;}
+    .project:hover{padding-left:12px;}
+    .xp .when{margin-top:6px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1; transform:none; transition:none;}
+    .btn,.project{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <span class="name" id="brandName"></span>
+    <nav>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#certs">Certifications</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero" style="border-top:none;">
+    <p class="eyebrow mono reveal" id="heroEyebrow"></p>
+    <h1 class="reveal" id="heroTitle"></h1>
+    <p class="lede reveal" id="heroLede"></p>
+    <div class="actions reveal">
+      <a class="btn primary" id="heroGithub" href="#" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn ghost" id="heroLinkedin" href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <div class="facts reveal" id="factsRow" aria-label="At a glance"></div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section id="experience">
+    <div class="section-head"><h2>Experience</h2></div>
+    <div id="experienceList" class="reveal"></div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section id="skills">
+    <div class="section-head"><h2>Skills</h2></div>
+    <div class="skills reveal" id="skillsList"></div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section id="certs">
+    <div class="section-head"><h2>Certifications</h2></div>
+    <div id="certsList" class="reveal"></div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section id="projects">
+    <div class="section-head"><h2>Projects</h2></div>
+    <div class="work reveal" id="projectsList"></div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section id="education">
+    <div class="section-head"><h2>Education</h2></div>
+    <div id="educationList" class="reveal"></div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section id="contact" class="contact">
+    <h2 class="reveal">Let's talk Azure.</h2>
+    <p class="reveal">Open to Azure cloud and infrastructure roles — administration, engineering, and security. The best way to reach me is through LinkedIn or GitHub.</p>
+    <div class="actions reveal">
+      <a class="btn primary" id="contactLinkedin" href="#" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+      <a class="btn ghost" id="contactGithub" href="#" target="_blank" rel="noopener">View GitHub ↗</a>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <span id="footName"></span>
+    <span class="flinks">
+      <a id="footLinkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a id="footGithub" href="#" target="_blank" rel="noopener">GitHub</a>
+    </span>
+  </footer>
+</div>
+
+
+<!-- ===================================================================== -->
+<!--  EDIT EVERYTHING BELOW. This is the only part you touch to update the  -->
+<!--  site. Each section is a list — to ADD something, copy one { ... }     -->
+<!--  block, paste it, and edit the text. Keep the commas and quotes.       -->
+<!-- ===================================================================== -->
+<script>
+  /* ---------- BASIC INFO ---------- */
+  const PROFILE = {
+    name:     "Dinto Martin",
+    eyebrow:  "Azure Cloud & Infrastructure Engineer",
+    // Headline. Wrap highlighted words in <span class="accent">...</span>
+    title:    'Azure cloud,<br><span class="accent">administered &amp; engineered.</span>',
+    lede:     "I'm an Azure-focused cloud & infrastructure engineer — administering, securing, and engineering Windows Server estates across Azure (and AWS), backed by 9 Microsoft Azure certifications. Open to Azure administration and engineering roles.",
+    github:   "https://github.com/dintomartin",
+    linkedin: "https://www.linkedin.com/in/dintomartin",
+  };
+
+  /* ---------- HERO FACTS (the row under the buttons) ---------- */
+  const FACTS = [
+    { k:"Experience", v:"3 years" },
+    { k:"Azure certs", v:"9" },
+    { k:"Cloud", v:"Azure / AWS" },
+  ];
+
+  /* ---------- EXPERIENCE ----------
+     To add a job: copy one { ... } block and edit it. */
+  const EXPERIENCE = [
+    {
+      role:     "Infra Managed Service Analyst",
+      sub:      "System Administrator · Azure, AWS &amp; Infrastructure",
+      company:  "Accenture — Bangalore, Karnataka",
+      period:   "Aug 2023 — Present",
+      bullets: [
+        "Managed end-to-end administration of Windows Servers on Azure and AWS, ensuring 99.9% uptime.",
+        "Led troubleshooting and disaster recovery to restore server access and minimise downtime during critical outages.",
+        "Owned the full lifecycle of patch management and software installations for security and operational compliance.",
+        "Primary technical point of contact for complex infrastructure issues, coordinating with Microsoft and AWS support.",
+        "Administered Azure/AWS storage — configuration, expansion, and management of OS and data disks.",
+        "Configured and managed Active Directory: user/group management, object lifecycles, and Role-Based Access Control (RBAC).",
+        "Maintained network naming services, managing DNS entries including CNAME and A-record configurations.",
+        "Executed post-build activities on new servers — hardening, role/feature installation, and baseline configuration.",
+        "Optimised server performance by monitoring system health and tuning Windows roles and features per project needs.",
+      ],
+    },
+    // { role:"", sub:"", company:"", period:"", bullets:["",""] },
+  ];
+
+  /* ---------- SKILLS ----------
+     The first group has featured:true, which highlights it (your Azure focus).
+     Add a skill -> add a "string" to any items list.
+     Add a category -> copy one { ... } block. */
+  const SKILLS = [
+    { group:"Microsoft Azure", items:[
+        "Azure Administration","Azure Solutions Architecture","Azure Security Engineering",
+        "Azure AI Engineering","Identity & Access (Entra ID)","Azure Storage & Disks","Azure Networking"
+    ] },
+    { group:"Cloud & IaC",          items:["AWS","Terraform","GitHub Actions CI/CD"] },
+    { group:"Identity & Security",  items:["Active Directory","RBAC","Patch Management","Server Hardening"] },
+    { group:"Systems & Networking", items:["Windows Server","DNS (A / CNAME)","Disaster Recovery","Performance Tuning"] },
+  ];
+
+  /* ---------- CERTIFICATIONS ----------
+     Add a cert -> add a "string" to the right issuer's items list.
+     Add an issuer -> copy one { ... } block. */
+  const CERTIFICATIONS = [
+    {
+      issuer:"Microsoft Certified",
+      items:[
+        "Azure Solutions Architect Expert",
+        "Identity and Access Administrator Associate",
+        "Azure Security Engineer Associate",
+        "Azure AI Engineer Associate",
+        "Azure Administrator Associate",
+        "Security, Compliance, and Identity Fundamentals",
+        "Azure Data Fundamentals",
+        "Azure AI Fundamentals",
+        "Azure Fundamentals",
+      ],
+    },
+    { issuer:"ICT Academy of Kerala", items:["Certified Specialist in Cyber Security Analyst"] },
+    { issuer:"Google Cloud",          items:["Cloud Digital Leader"] },
+  ];
+
+  /* ---------- PROJECTS ----------
+     To add a project: copy one { ... } block. */
+  const PROJECTS = [
+    {
+      name:"terraform-azure-modules",
+      tag:"Terraform · CI/CD",
+      desc:"Reusable, versioned Terraform modules for Azure with a GitHub Actions CI/CD pipeline (lint, security, plan & cost checks).",
+      url:"https://github.com/dintomartin/terraform-azure-modules",
+    },
+    {
+      name:"azure-beginner-level",
+      tag:"Azure · Learning",
+      desc:"A collection of beginner-level Azure projects built as part of my cloud learning path.",
+      url:"https://github.com/dintomartin/azure-beginner-level",
+    },
+  ];
+
+  /* ---------- EDUCATION ----------
+     To add: copy one { ... } block. */
+  const EDUCATION = [
+    {
+      degree:"BSc Computer Science",
+      school:"Mahatma Gandhi University, Kottayam, Kerala",
+      detail:"3-year programme · CGPA 8.39",
+    },
+  ];
+
+  /* ===================================================================== */
+  /*  RENDERING — you don't need to edit anything below this line.          */
+  /* ===================================================================== */
+  const $ = (id) => document.getElementById(id);
+
+  $("brandName").textContent = PROFILE.name;
+  $("footName").textContent  = "© " + new Date().getFullYear() + " " + PROFILE.name;
+  $("heroEyebrow").textContent = PROFILE.eyebrow;
+  $("heroTitle").innerHTML = PROFILE.title;
+  $("heroLede").textContent = PROFILE.lede;
+  ["heroGithub","contactGithub","footGithub"].forEach(id => $(id).href = PROFILE.github);
+  ["heroLinkedin","contactLinkedin","footLinkedin"].forEach(id => $(id).href = PROFILE.linkedin);
+
+  $("factsRow").innerHTML = FACTS.map(f =>
+    `<div class="f"><div class="k">${f.k}</div><div class="v">${f.v}</div></div>`
+  ).join("");
+
+  $("experienceList").innerHTML = EXPERIENCE.map(x => `
+    <div class="xp">
+      <div class="row">
+        <div>
+          <h3>${x.role}</h3>
+          <div class="sub">${x.sub}</div>
+          <div class="co">${x.company}</div>
+        </div>
+        <div class="when">${x.period}</div>
+      </div>
+      <ul>${x.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+    </div>
+  `).join("");
+
+  $("skillsList").innerHTML = SKILLS.map(s => `
+    <div class="skillcard${s.featured ? " featured" : ""}">
+      <div class="g mono">${s.group}</div>
+      <div class="chips">${s.items.map(i => `<span class="chip">${i}</span>`).join("")}</div>
+    </div>
+  `).join("");
+
+  $("certsList").innerHTML = CERTIFICATIONS.map(c => `
+    <div class="certgroup">
+      <div class="glabel">
+        <span class="gname">${c.issuer}</span>
+        <span class="count">${c.items.length}</span>
+      </div>
+      <div class="certgrid">
+        ${c.items.map(i => `<div class="cert"><span class="mark">&rsaquo;</span><span class="t">${i}</span></div>`).join("")}
+      </div>
+    </div>
+  `).join("");
+
+  $("projectsList").innerHTML = PROJECTS.map((p, idx) => `
+    <a class="project" href="${p.url}" target="_blank" rel="noopener">
+      <span class="idx">${String(idx + 1).padStart(2, "0")}</span>
+      <span>
+        <h3>${p.name}</h3>
+        <span class="meta">${p.desc}</span>
+      </span>
+      <span class="tag">${p.tag}</span>
+    </a>
+  `).join("");
+
+  $("educationList").innerHTML = EDUCATION.map(e => `
+    <div class="edu">
+      <h3>${e.degree}</h3>
+      <div class="school">${e.school}</div>
+      <div class="detail">${e.detail}</div>
+    </div>
+  `).join("");
+
+  /* scroll reveal */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); obs.unobserve(e.target); } });
+  }, { threshold:0.1 });
+  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
